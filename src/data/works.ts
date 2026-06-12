@@ -7,34 +7,29 @@ export type Work = {
   status: "live" | "wip";
   url?: string;
   description?: string;
+  /** hover preview swatch — replace with a screenshot later */
+  gradient?: string;
 };
 
 // 成果物を追加するときはここに追記するだけで Works セクションに反映される
 export const works: Work[] = [
   {
-    index: "001",
-    title: "PORTFOLIO ENGINE",
+    index: "01",
+    title: "Portfolio 2026",
     year: "2026",
-    role: "Design / Engineering",
+    role: "Design & Development",
     tags: ["Next.js", "React Three Fiber", "GLSL"],
     status: "live",
     description:
-      "このサイト自体。シェーダー彫刻とHUDで構成した個人アーカイブ。",
+      "このサイト。WebGLのオブジェとタイポグラフィで構成した個人サイト。",
+    gradient: "linear-gradient(135deg, #f6d8c3 0%, #c9d2f6 60%, #d9f0e2 100%)",
   },
   {
-    index: "002",
-    title: "UNANNOUNCED PROJECT",
+    index: "02",
+    title: "New project",
     year: "2026",
-    role: "TBA",
-    tags: ["IN DEVELOPMENT"],
-    status: "wip",
-  },
-  {
-    index: "003",
-    title: "UNANNOUNCED PROJECT",
-    year: "2026",
-    role: "TBA",
-    tags: ["IN DEVELOPMENT"],
+    role: "準備中",
+    tags: [],
     status: "wip",
   },
 ];

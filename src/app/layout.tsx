@@ -1,48 +1,50 @@
 import type { Metadata, Viewport } from "next";
 import {
-  Syne,
-  Space_Grotesk,
-  IBM_Plex_Mono,
+  Fraunces,
+  Inter,
   Zen_Kaku_Gothic_New,
+  Shippori_Mincho,
 } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-syne",
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
 });
 
-const grotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-grotesk",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
+  variable: "--font-inter",
 });
 
 const zenKaku = Zen_Kaku_Gothic_New({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
   variable: "--font-zen",
   preload: false,
 });
 
+const shippori = Shippori_Mincho({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-shippori",
+  preload: false,
+});
+
 export const metadata: Metadata = {
-  title: "SHUN — Creative Developer",
+  title: "Shun — Software Engineer",
   description:
-    "Software engineer & creative developer based in Tokyo. コードで未来の手触りをつくる。",
+    "Software engineer based in Tokyo. コードで、心地よい体験をつくる。",
   openGraph: {
-    title: "SHUN — Creative Developer",
-    description: "Software engineer & creative developer based in Tokyo.",
+    title: "Shun — Software Engineer",
+    description: "Software engineer based in Tokyo.",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07070a",
+  themeColor: "#f6f3ec",
 };
 
 export default function RootLayout({
@@ -53,11 +55,9 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${syne.variable} ${grotesk.variable} ${plexMono.variable} ${zenKaku.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${zenKaku.variable} ${shippori.variable} h-full antialiased`}
     >
-      <body className="noise min-h-full bg-bg font-body text-ink">
-        {children}
-      </body>
+      <body className="min-h-full bg-bg font-sans text-ink">{children}</body>
     </html>
   );
 }

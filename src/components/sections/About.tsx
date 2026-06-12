@@ -1,63 +1,59 @@
 import Reveal from "@/components/Reveal";
+import ScrollRevealText from "@/components/ScrollRevealText";
 
 const FIELDS = [
   {
-    no: "A",
-    en: "WEB ENGINEERING",
-    jp: "プロダクションレベルのフロントエンド/バックエンド開発",
+    no: "01",
+    title: "Web Engineering",
+    text: "フロントエンドからバックエンドまで、プロダクションレベルのウェブ開発。",
   },
   {
-    no: "B",
-    en: "INTERACTIVE 3D",
-    jp: "WebGL・シェーダーによる体験のデザインと実装",
+    no: "02",
+    title: "Interactive 3D",
+    text: "WebGLとシェーダーを使った、動きのある表現の設計と実装。",
   },
   {
-    no: "C",
-    en: "PRODUCT DESIGN",
-    jp: "触って気持ちいいUI/UXの設計と検証",
+    no: "03",
+    title: "Product Design",
+    text: "触って心地よいUI/UXの設計、プロトタイピング、検証。",
   },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-32 md:px-12 md:py-48">
-      <Reveal>
-        <p className="mb-12 font-mono text-[11px] tracking-[0.3em] text-muted">
-          ( 002 ) — ABOUT
-        </p>
-      </Reveal>
+    <section id="about" className="border-t border-line">
+      <div className="mx-auto max-w-6xl px-6 py-28 md:px-8 md:py-40">
+        <Reveal>
+          <p className="label mb-12">About</p>
+        </Reveal>
 
-      <Reveal delay={0.1}>
-        <h2 className="max-w-4xl font-display text-3xl font-bold leading-snug md:text-5xl">
-          手を動かして、
-          <span className="text-accent">未来</span>
-          を確かめる。
-        </h2>
-      </Reveal>
+        {/* characters focus in as you scroll — reading pace = scrolling pace */}
+        <ScrollRevealText
+          text="東京を拠点に、ウェブとリアルタイムグラフィックスを横断しながら、思わず触りたくなる体験をつくっています。"
+          className="max-w-4xl font-jp-serif text-2xl leading-[1.9] tracking-wide md:text-4xl md:leading-[1.9]"
+        />
 
-      <Reveal delay={0.2}>
-        <p className="mt-8 max-w-xl font-jp text-sm leading-loose text-muted md:text-base">
-          東京を拠点に活動するソフトウェアエンジニア。
-          ウェブの標準技術からリアルタイムグラフィックスまでを横断し、
-          「画面の向こうに質量を感じる」体験をつくることに興味があります。
-          このサイトは実験場であり、展示室であり、記録装置です。
-        </p>
-      </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-12 max-w-md font-jp text-sm leading-loose text-muted md:text-base">
+            このサイトは、つくったものを展示し、考えたことを記録していくための場所です。
+          </p>
+        </Reveal>
 
-      <div className="mt-20 border-t border-line">
-        {FIELDS.map((f, i) => (
-          <Reveal key={f.no} delay={0.1 * i}>
-            <div className="group grid grid-cols-[3rem_1fr] items-baseline gap-4 border-b border-line py-8 md:grid-cols-[6rem_1fr_1fr]">
-              <span className="font-mono text-xs text-accent">/{f.no}</span>
-              <h3 className="font-display text-xl font-bold tracking-wide transition-transform duration-500 group-hover:translate-x-3 md:text-3xl">
-                {f.en}
-              </h3>
-              <p className="col-start-2 mt-2 font-jp text-xs leading-relaxed text-muted md:col-start-3 md:mt-0 md:text-sm">
-                {f.jp}
-              </p>
-            </div>
-          </Reveal>
-        ))}
+        <div className="mt-24 border-t border-line">
+          {FIELDS.map((f, i) => (
+            <Reveal key={f.no} delay={0.08 * i}>
+              <div className="grid grid-cols-[3rem_1fr] items-baseline gap-4 border-b border-line py-8 md:grid-cols-[6rem_1fr_1fr]">
+                <span className="text-xs text-muted">{f.no}</span>
+                <h3 className="font-serif text-2xl tracking-tight md:text-3xl">
+                  {f.title}
+                </h3>
+                <p className="col-start-2 mt-2 font-jp text-sm leading-relaxed text-muted md:col-start-3 md:mt-0">
+                  {f.text}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

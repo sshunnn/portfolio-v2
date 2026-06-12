@@ -84,8 +84,8 @@ varying vec3 vView;
 ${NOISE_GLSL}
 
 void main() {
-  float n = snoise(position * 0.9 + uTime * 0.22);
-  float n2 = snoise(position * 2.6 - uTime * 0.15) * 0.35;
+  float n = snoise(position * 0.8 + uTime * 0.12);
+  float n2 = snoise(position * 1.9 - uTime * 0.08) * 0.4;
   float d = n + n2;
 
   vec3 p = position + normal * d * uAmp;
@@ -98,27 +98,26 @@ void main() {
 }
 `;
 
+// soft pearl: pastel gradient driven by surface direction + white sheen
 const fragmentShader = /* glsl */ `
 uniform float uTime;
-uniform float uScroll;
-uniform vec3 uColorA;
-uniform vec3 uColorB;
-uniform vec3 uAccent;
 
 varying float vNoise;
 varying vec3 vNormal;
 varying vec3 vView;
 
 void main() {
-  float fres = pow(1.0 - max(dot(normalize(vNormal), normalize(vView)), 0.0), 2.2);
+  vec3 n = normalize(vNormal);
+  float fres = pow(1.0 - max(dot(n, normalize(vView)), 0.0), 2.0);
 
-  vec3 base = mix(uColorA, uColorB, vNoise * 0.5 + 0.5);
-  float pulse = 0.55 + 0.45 * sin(uScroll * 6.2831 + uTime * 0.35);
-  vec3 col = mix(base, uAccent, fres * pulse);
-  col += uAccent * smoothstep(0.55, 1.0, vNoise) * 0.12;
+  vec3 peach      = vec3(0.97, 0.86, 0.78);
+  vec3 periwinkle = vec3(0.78, 0.82, 0.97);
+  vec3 mint       = vec3(0.85, 0.94, 0.88);
 
-  float g = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
-  col += (g - 0.5) * 0.05;
+  vec3 col = mix(periwinkle, peach, n.x * 0.5 + 0.5);
+  col = mix(col, mint, smoothstep(-0.2, 0.9, n.y) * 0.6);
+  col = mix(col, vec3(1.0), fres * 0.55);
+  col += vNoise * 0.03;
 
   gl_FragColor = vec4(col, 1.0);
 }
@@ -126,62 +125,39 @@ void main() {
 
 const INITIAL_UNIFORMS = {
   uTime: { value: 0 },
-  uAmp: { value: 0.42 },
-  uScroll: { value: 0 },
-  uColorA: { value: new THREE.Color("#101013") },
-  uColorB: { value: new THREE.Color("#2c2c31") },
-  uAccent: { value: new THREE.Color("#ff4d00") },
+  uAmp: { value: 0.32 },
 };
 
 export default function Blob() {
   const mesh = useRef<THREE.Mesh>(null);
-  const cage = useRef<THREE.Mesh>(null);
   const material = useRef<THREE.ShaderMaterial>(null);
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const t = state.clock.elapsedTime;
 
     if (material.current) {
       const u = material.current.uniforms;
       u.uTime.value = t;
-      u.uScroll.value = scrollState.progress;
-
-      // scrolling agitates the sculpture
+      // scrolling gently agitates the surface
       const targetAmp =
-        0.42 + Math.min(Math.abs(scrollState.velocity) * 0.012, 0.5);
-      u.uAmp.value += (targetAmp - u.uAmp.value) * 0.06;
+        0.32 + Math.min(Math.abs(scrollState.velocity) * 0.008, 0.3);
+      u.uAmp.value += (targetAmp - u.uAmp.value) * 0.05;
     }
-
     if (mesh.current) {
-      mesh.current.rotation.y = t * 0.08 + scrollState.progress * Math.PI * 2;
-      mesh.current.rotation.x = Math.sin(t * 0.1) * 0.15;
-    }
-    if (cage.current) {
-      cage.current.rotation.y -= delta * 0.04;
-      cage.current.rotation.z += delta * 0.02;
+      mesh.current.rotation.y = t * 0.05 + scrollState.progress * 1.2;
+      mesh.current.rotation.x = Math.sin(t * 0.07) * 0.1;
     }
   });
 
   return (
-    <group>
-      <mesh ref={mesh}>
-        <icosahedronGeometry args={[1.7, 64]} />
-        <shaderMaterial
-          ref={material}
-          vertexShader={vertexShader}
-          fragmentShader={fragmentShader}
-          uniforms={INITIAL_UNIFORMS}
-        />
-      </mesh>
-      <mesh ref={cage}>
-        <icosahedronGeometry args={[2.9, 1]} />
-        <meshBasicMaterial
-          wireframe
-          color="#3a3a40"
-          transparent
-          opacity={0.45}
-        />
-      </mesh>
-    </group>
+    <mesh ref={mesh}>
+      <icosahedronGeometry args={[1.6, 64]} />
+      <shaderMaterial
+        ref={material}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={INITIAL_UNIFORMS}
+      />
+    </mesh>
   );
 }
