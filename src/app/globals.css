@@ -36,6 +36,39 @@ body {
   color: var(--bg);
 }
 
+/* soft drifting colour wash used behind hero and contact */
+.aurora {
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 35% at 20% 25%, rgba(255, 162, 110, 0.5), transparent 70%),
+    radial-gradient(35% 35% at 78% 18%, rgba(132, 152, 255, 0.45), transparent 70%),
+    radial-gradient(45% 40% at 62% 78%, rgba(130, 220, 175, 0.45), transparent 70%),
+    radial-gradient(30% 30% at 28% 82%, rgba(255, 209, 120, 0.4), transparent 70%);
+  filter: blur(70px);
+  animation: aurora-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift {
+  from { transform: translate3d(-3%, -2%, 0) rotate(-2deg); }
+  to { transform: translate3d(3%, 2%, 0) rotate(2deg); }
+}
+
+/* vivid pastel sweep for display type */
+.gradient-text {
+  background: linear-gradient(100deg, #ff8a4d 0%, #6d7fff 55%, #2fae72 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora {
+    animation: none;
+  }
+}
+
 /* hollow display type for the scroll marquees */
 .stroke-text {
   color: transparent;

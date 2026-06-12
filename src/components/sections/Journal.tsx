@@ -16,11 +16,17 @@ export default function Journal() {
 
         {posts.length === 0 ? (
           <Reveal delay={0.15}>
-            <div className="rounded-2xl border border-line px-8 py-16 text-center md:py-20">
-              <p className="font-serif text-2xl italic text-muted md:text-3xl">
+            <div
+              className="rounded-2xl px-8 py-16 text-center md:py-20"
+              style={{
+                background:
+                  "linear-gradient(120deg, #f3e9ff 0%, #ffeedd 55%, #e3f4ea 100%)",
+              }}
+            >
+              <p className="font-serif text-2xl italic text-ink/70 md:text-3xl">
                 First entry in the making
               </p>
-              <p className="mx-auto mt-5 max-w-md font-jp text-sm leading-loose text-muted">
+              <p className="mx-auto mt-5 max-w-md font-jp text-sm leading-loose text-ink/60">
                 最初の記事を準備しています。技術メモや制作の裏側、考えたことをここに残していく予定です。
               </p>
             </div>

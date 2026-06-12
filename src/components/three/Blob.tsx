@@ -110,9 +110,9 @@ void main() {
   vec3 n = normalize(vNormal);
   float fres = pow(1.0 - max(dot(n, normalize(vView)), 0.0), 2.0);
 
-  vec3 peach      = vec3(0.97, 0.86, 0.78);
-  vec3 periwinkle = vec3(0.78, 0.82, 0.97);
-  vec3 mint       = vec3(0.85, 0.94, 0.88);
+  vec3 peach      = vec3(1.0, 0.72, 0.52);
+  vec3 periwinkle = vec3(0.55, 0.62, 1.0);
+  vec3 mint       = vec3(0.55, 0.9, 0.7);
 
   vec3 col = mix(periwinkle, peach, n.x * 0.5 + 0.5);
   col = mix(col, mint, smoothstep(-0.2, 0.9, n.y) * 0.6);

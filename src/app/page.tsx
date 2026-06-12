@@ -18,7 +18,7 @@ export default function Home() {
         <Hero />
         <VelocityMarquee
           text="Portfolio — Two Thousand Twenty-Six"
-          className="stroke-text border-t border-line py-10 font-serif text-[11vw] italic leading-none md:py-14 md:text-[7vw]"
+          className="gradient-text border-t border-line py-10 font-serif text-[11vw] italic leading-none opacity-90 md:py-14 md:text-[7vw]"
         />
         <About />
         <Works />

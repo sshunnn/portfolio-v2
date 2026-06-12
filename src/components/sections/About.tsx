@@ -6,16 +6,19 @@ const FIELDS = [
     no: "01",
     title: "Web Engineering",
     text: "フロントエンドからバックエンドまで、プロダクションレベルのウェブ開発。",
+    bg: "#ffe2cd",
   },
   {
     no: "02",
     title: "Interactive 3D",
     text: "WebGLとシェーダーを使った、動きのある表現の設計と実装。",
+    bg: "#dde3ff",
   },
   {
     no: "03",
     title: "Product Design",
     text: "触って心地よいUI/UXの設計、プロトタイピング、検証。",
+    bg: "#d8f1e3",
   },
 ];
 
@@ -39,15 +42,18 @@ export default function About() {
           </p>
         </Reveal>
 
-        <div className="mt-24 border-t border-line">
+        <div className="mt-24 grid gap-6 md:grid-cols-3">
           {FIELDS.map((f, i) => (
             <Reveal key={f.no} delay={0.08 * i}>
-              <div className="grid grid-cols-[3rem_1fr] items-baseline gap-4 border-b border-line py-8 md:grid-cols-[6rem_1fr_1fr]">
-                <span className="text-xs text-muted">{f.no}</span>
-                <h3 className="font-serif text-2xl tracking-tight md:text-3xl">
+              <div
+                className="flex h-full flex-col rounded-2xl p-8 transition-transform duration-500 hover:-translate-y-1.5"
+                style={{ background: f.bg }}
+              >
+                <span className="text-xs text-ink/50">{f.no}</span>
+                <h3 className="mt-10 font-serif text-2xl tracking-tight md:mt-14 md:text-3xl">
                   {f.title}
                 </h3>
-                <p className="col-start-2 mt-2 font-jp text-sm leading-relaxed text-muted md:col-start-3 md:mt-0">
+                <p className="mt-3 font-jp text-sm leading-relaxed text-ink/70">
                   {f.text}
                 </p>
               </div>

@@ -25,6 +25,8 @@ export default function Hero() {
       ref={ref}
       className="relative flex min-h-svh items-center overflow-hidden"
     >
+      <div className="aurora" aria-hidden />
+
       <motion.div
         className="absolute inset-y-0 right-0 w-full opacity-60 md:left-1/3 md:w-auto md:opacity-100"
         style={{ y: blobY, scale: blobScale }}
@@ -47,7 +49,7 @@ export default function Hero() {
 
         <h1 className="max-w-4xl font-serif text-[13vw] leading-[1.04] tracking-tight md:text-[6.6vw]">
           {[
-            <>Crafting <em className="text-accent">digital</em></>,
+            <>Crafting <em className="gradient-text">digital</em></>,
             <>experiences,</>,
             <>with <em>care</em>.</>,
           ].map((line, i) => (
