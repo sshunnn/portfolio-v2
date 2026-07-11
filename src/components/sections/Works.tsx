@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { works, type Work } from "@/data/works";
 
@@ -48,13 +49,9 @@ function WorkCard({ work }: { work: Work }) {
     </div>
   );
 
-  return work.url ? (
-    <a href={work.url} target="_blank" rel="noreferrer">
-      {card}
-    </a>
-  ) : (
-    card
-  );
+  if (work.slug) return <Link href={`/works/${work.slug}`}>{card}</Link>;
+  if (work.url) return <a href={work.url} target="_blank" rel="noreferrer">{card}</a>;
+  return card;
 }
 
 export default function Works() {
