@@ -10,18 +10,18 @@ export const metadata: Metadata = {
 const ARCHITECTURE = [
   {
     path: ".claude/agents/",
-    items: ["advisor.md", "planner.md"],
+    items: ["advisor.md（Claude Haiku）", "planner.md（Claude Sonnet）"],
     description: "サブエージェント定義",
   },
   {
     path: ".claude/commands/",
-    items: ["auto-improve.md", "auto-skill.md", "google-ads-automation/", "nano-banana-claude-pipeline/"],
+    items: ["/auto-improve", "/auto-skill", "/google-ads-automation", "/nano-banana-claude-pipeline"],
     description: "スラッシュコマンド",
   },
   {
     path: ".claude/skills/",
-    items: ["（自動生成）"],
-    description: "再利用可能なスキル置き場",
+    items: ["再利用可能なスキルを自動生成・蓄積"],
+    description: "スキル置き場",
   },
   {
     path: "scripts/",
@@ -29,7 +29,6 @@ const ARCHITECTURE = [
       "maintenance.ps1",
       "new-improvement-branch.ps1",
       "finish-improvement-pr.ps1",
-      "validate-repo.ps1",
     ],
     description: "PowerShell 自動化スクリプト",
   },
@@ -41,7 +40,7 @@ const AGENTS = [
     model: "Claude Haiku",
     role: "改善案の提案",
     detail:
-      "指定されたコードを調査し、改善案を3つ、効果・コスト・リスクのトレードオフ付きで提示。実装は行わない。",
+      "指定されたコードを調査し、改善案を3つ・効果／コスト／リスクのトレードオフ付きで提示する。実装は行わず、提案に特化させることで速度と精度を両立している。",
     tools: "Read / Grep / Glob",
   },
   {
@@ -49,7 +48,7 @@ const AGENTS = [
     model: "Claude Sonnet",
     role: "実装計画の立案",
     detail:
-      "採用された改善案について、変更対象ファイル・手順・リスク・テスト方針を plan.md に書き出す。plan.md 以外は変更しない。",
+      "採用された改善案について、変更対象ファイル・手順・リスク・テスト方針を plan.md に書き出す。plan.md 以外は変更しないという制約を設けることで、計画フェーズと実装フェーズを明確に分離している。",
     tools: "Read / Grep / Glob / Bash / Write",
   },
 ];
@@ -59,11 +58,11 @@ const COMMANDS = [
     name: "/auto-improve",
     summary: "改善案ごとに自動でブランチ → 実装 → push → PR を作成する",
     steps: [
-      "advisor が改善案を3つ洗い出す",
-      "ベースブランチから案ごとのブランチを作成",
-      "planner が plan.md に実装計画を書き出す",
-      "plan.md に従い実装・テスト",
-      "コミット → push → gh pr create まで全自動",
+      "advisor（Haiku）が改善案を3つ・トレードオフ付きで洗い出す",
+      "ベースブランチから案ごとの feature ブランチを作成",
+      "planner（Sonnet）が plan.md に実装計画を書き出す",
+      "plan.md に従い実装・テストをメインモデルが実行",
+      "コミット → push → gh pr create まで全自動で完了",
     ],
   },
   {
@@ -94,11 +93,28 @@ export default function ShunClaudeWorkspacePage() {
         <p className="label mb-4">Overview</p>
         <p className="font-jp text-lg leading-relaxed text-muted md:text-xl">
           Claude Code の設定・サブエージェント・スラッシュコマンド・スキルを集約するプライベートリポジトリ。
-          コードのレビューから実装計画、ブランチ作成・PR 作成まで、すべてを AI に委譲して自動化することをコンセプトにしている。
+          「コードレビューから実装・PR作成まですべてをAIに委譲する」をコンセプトに、
+          開発サイクル全体を自動化する仕組みを構築している。
         </p>
-        <p className="mt-4 font-jp text-lg leading-relaxed text-muted md:text-xl">
-          メインセッションはコーディングに集中し、提案には Haiku（高速・低コスト）、計画立案には Sonnet（高精度）と、
+        <p className="mt-6 font-jp text-lg leading-relaxed text-muted md:text-xl">
+          業務でCodex・Claude Codeを活用したAI駆動開発に取り組む中で、
+          「セッションをまたいだ知識の継続性」と「繰り返し作業の完全自動化」が課題になった。
+          このリポジトリはその解決策として設計したもので、
+          使うたびにスキルが蓄積され、AIが過去の経験から学習し続ける構造になっている。
+        </p>
+      </section>
+
+      {/* motivation */}
+      <section className="mb-20">
+        <p className="label mb-4">設計の考え方</p>
+        <p className="font-jp text-sm leading-loose text-muted md:text-base">
+          メインセッション（自分）はビジネスロジックと判断に集中し、
+          提案フェーズにはHaiku（高速・低コスト）、計画立案にはSonnet（高精度）と、
           用途に応じてモデルを使い分けるマルチエージェント構成をとっている。
+          これにより、AIを「使いっぱなし」にするのではなく、
+          役割ごとに最適なモデルを割り当てるオーケストレーション層として機能させている。
+          また、「再利用可能な手順・ノウハウを3回繰り返したら自動でスキル化する」ルールを設けることで、
+          失敗から学んだ知識も含めて蓄積・再利用できる仕組みにしている。
         </p>
       </section>
 
@@ -166,11 +182,8 @@ export default function ShunClaudeWorkspacePage() {
 
       {/* workflow */}
       <section className="mb-20">
-        <p className="label mb-8">Workflow</p>
+        <p className="label mb-8">典型的なセッションの流れ</p>
         <div className="rounded-xl border border-line bg-ink/[0.02] p-6 md:p-8">
-          <p className="mb-6 font-jp text-sm leading-relaxed text-muted">
-            典型的なセッションの流れ
-          </p>
           <div className="space-y-0">
             {[
               { step: "起動", desc: "claude --permission-mode bypassPermissions" },
@@ -196,19 +209,6 @@ export default function ShunClaudeWorkspacePage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* auto-skill rule */}
-      <section className="mb-20">
-        <p className="label mb-4">Auto-skill Rule</p>
-        <div className="rounded-xl border border-line p-6 md:p-8">
-          <p className="font-jp text-sm leading-relaxed text-muted">
-            作業中に「再利用可能な手順・ノウハウ・定型パターン」を 3 回以上繰り返したと判断したら、
-            Claude が自動的に <code className="font-mono text-xs text-accent">/auto-skill</code> と同じ手順でスキルを生成し、
-            <code className="font-mono text-xs text-accent">skill/</code> ブランチ経由で PR を作成するルールを設けている。
-            失敗から学んだ回避策もスキルとして積み上げ、セッションをまたいだ知識の蓄積を目指している。
-          </p>
         </div>
       </section>
 

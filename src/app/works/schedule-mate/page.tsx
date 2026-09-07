@@ -11,39 +11,39 @@ const FEATURES = [
   {
     title: "/schedule_new コマンド",
     description:
-      "イベント名と候補日（カンマ区切り）を指定するだけで投票パネルを生成。参加者はボタンをポチるだけで○△×を記録できる。",
+      "イベント名と候補日（カンマ区切り）を指定するだけで投票パネルを自動生成。参加者はDiscord上のボタンをクリックするだけで○△×を記録できる。メッセージに直接埋め込まれるため、外部リンクへの遷移が不要。",
   },
   {
-    title: "ボタン投票UI",
+    title: "最適日の自動提案",
     description:
-      "Discord の Interaction API を使ったボタンコンポーネント。メッセージに直接埋め込まれるため、リンク遷移なしで投票できる。",
+      "全参加者の投票が揃った段階で、○が全員一致する日を最優先に、△込みの参加率上位日を次点として自動提案。幹事が手動で集計する手間をゼロにする。",
   },
   {
     title: "/calendar コマンド",
     description:
-      "月別カレンダーをテキストで描画し、既存イベントが入っている日をマーキング。",
+      "月別カレンダーをテキストで描画し、既存イベントが入っている日をマーキング。過去に作成したイベントと候補日が一覧で把握できる。",
   },
   {
-    title: "最適日自動提案",
+    title: "非同期イベント駆動設計",
     description:
-      "全参加者の投票を集計し、全員○の日を最優先、次点は△込みの参加率上位日を提案。",
+      "discord.py の asyncio ベースの設計を活かし、複数のインタラクションを並列で処理。ボタン押下からの応答をブロッキングなしで捌ける構成にした。",
   },
 ];
 
 const ARCHITECTURE = [
   {
     path: "main.py",
-    items: ["Bot エントリポイント", "Cog のロード"],
+    items: ["Bot エントリポイント", "Cog のロードと起動処理"],
     description: "エントリポイント",
   },
   {
     path: "cogs/scheduler.py",
-    items: ["/schedule_new の実装"],
+    items: ["/schedule_new の実装", "ボタンインタラクション処理"],
     description: "スケジューラー Cog",
   },
   {
     path: "utils/calendar_utils.py",
-    items: ["カレンダー描画", "最適日算出ロジック"],
+    items: ["カレンダー描画ロジック", "最適日算出アルゴリズム"],
     description: "ユーティリティ",
   },
   {
@@ -68,8 +68,27 @@ export default function ScheduleMatePage() {
       <section className="mb-20">
         <p className="label mb-4">Overview</p>
         <p className="font-jp text-lg leading-relaxed text-muted md:text-xl">
-          Discord サーバー内でのスケジュール調整を自動化する Bot。スラッシュコマンドでイベントを作成し、
-          メンバーはボタンをクリックするだけで都合を投票できる。全員の投票が揃ったら最適日を自動で提案する。
+          Discord サーバー内で完結するスケジュール調整 Bot。スラッシュコマンドひとつでインタラクティブな投票パネルを生成し、
+          参加者はDiscord を離れることなくボタンクリックだけで都合を回答できる。
+          全員の投票が揃うと最適日を自動提案する。
+        </p>
+        <p className="mt-6 font-jp text-lg leading-relaxed text-muted md:text-xl">
+          友人グループのゲームセッションや飲み会の日程調整を、LINEのスタンプ投票と幹事による手動集計で行っていたが、
+          メンバー全員がDiscordを日常的に使っていることに着目し、
+          「Discordを離れずに完結する」というUXを最優先に設計した。
+          Pythonのdiscord.py（py-cord）を使い、asyncioベースの非同期処理でボタンインタラクションを実装している。
+        </p>
+      </section>
+
+      {/* technical focus */}
+      <section className="mb-20">
+        <p className="label mb-4">技術的なポイント</p>
+        <p className="font-jp text-sm leading-loose text-muted md:text-base">
+          Discord の Interaction API を活用し、メッセージ本文に投票ボタンを直接埋め込む構成にした。
+          従来のリアクション集計（👍/👎 スタンプ）と異なり、ボタンはクリック状態の管理が容易で、
+          「同じ人が複数回投票する」「投票を取り消して別の選択肢に変更する」といったケースを正確に制御できる。
+          asyncio を活用した非同期設計により、複数ユーザーの同時投票も応答遅延なく処理できるようにした。
+          また、Cog パターンでコマンドを分割することで、機能追加時の影響範囲を最小化する設計を採用している。
         </p>
       </section>
 

@@ -72,8 +72,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9, ease: EASE }}
         >
-          コードで、心地よい体験をつくる。
-          ウェブの設計から、インタラクション、リアルタイムグラフィックスまで。
+          4年間のプロダクション開発経験を軸に、
+          ウェブの設計からインタラクション、リアルタイムグラフィックスまで。
         </motion.p>
       </motion.div>
 
