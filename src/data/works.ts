@@ -10,7 +10,7 @@ export type Work = {
   githubUrl?: string;
   liveUrl?: string;
   description?: string;
-  /** card cover — replace with a screenshot/image later */
+  image?: string;
   gradient: string;
 };
 
@@ -32,6 +32,7 @@ export const works: Work[] = [
   {
     index: "02",
     title: "Drink Party Adjustment",
+    image: "/works/drink-party-adjustment.png",
     year: "2026",
     role: "Development",
     tags: ["TypeScript", "Vercel"],
@@ -46,6 +47,7 @@ export const works: Work[] = [
   {
     index: "03",
     title: "Schedule Mate",
+    image: "/works/schedule-mate.png",
     year: "2025",
     role: "Development",
     tags: ["Python", "Discord Bot"],
@@ -59,6 +61,7 @@ export const works: Work[] = [
   {
     index: "04",
     title: "SimpleSplitTabs",
+    image: "/works/simple-split-tabs.png",
     year: "2025",
     role: "Development",
     tags: ["JavaScript", "Chrome Extension"],
@@ -72,6 +75,7 @@ export const works: Work[] = [
   {
     index: "05",
     title: "shun-claude-workspace",
+    image: "/works/shun-claude-workspace.png",
     year: "2026",
     role: "AI Tooling",
     tags: ["Claude Code", "PowerShell", "TypeScript"],

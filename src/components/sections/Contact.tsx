@@ -53,7 +53,7 @@ export default function Contact() {
 
         <Reveal delay={0.3}>
           <div className="mt-24 flex flex-col gap-4 border-t border-bg/15 pt-8 text-xs text-bg/50 md:flex-row md:items-center md:justify-between">
-            <p>© 2026 Shun — Tokyo, Japan</p>
+            <p>© 2026 Shun Sato — Tokyo, Japan</p>
             <a
               href="https://github.com/sshunnn"
               target="_blank"
