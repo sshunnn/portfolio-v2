@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { works, type Work } from "@/data/works";
@@ -8,23 +9,34 @@ function WorkCard({ work }: { work: Work }) {
   const card = (
     <div className="group">
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-        {/* cover zooms gently on hover */}
-        <div
-          className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105"
-          style={{ background: work.gradient }}
-          aria-hidden
-        />
-        <span className="absolute left-6 top-5 text-xs text-ink/50">
+        {work.image ? (
+          <Image
+            src={work.image}
+            alt={work.title}
+            fill
+            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105"
+            style={{ background: work.gradient }}
+            aria-hidden
+          />
+        )}
+        {/* overlay for text legibility on screenshots */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-ink/20" />
+        <span className="absolute left-6 top-5 text-xs text-white/70">
           {work.index}
         </span>
         {!wip && (
-          <span className="absolute right-6 top-5 text-xl text-ink/60 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
+          <span className="absolute right-6 top-5 text-xl text-white/70 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1">
             ↗
           </span>
         )}
         <span
           className={`absolute bottom-5 left-6 right-6 font-serif text-3xl italic tracking-tight md:text-4xl ${
-            wip ? "text-ink/40" : "text-ink/80"
+            wip ? "text-white/40" : "text-white/90"
           }`}
         >
           {wip ? "Coming soon" : work.title}
