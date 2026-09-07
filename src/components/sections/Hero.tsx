@@ -44,14 +44,14 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          Shun — Software Engineer, Tokyo
+          Shun Sato — Frontend Engineer, Tokyo
         </motion.p>
 
         <h1 className="max-w-4xl font-serif text-[13vw] leading-[1.04] tracking-tight md:text-[6.6vw]">
           {[
-            <>Crafting <em className="gradient-text">digital</em></>,
-            <>experiences,</>,
-            <>with <em>care</em>.</>,
+            <>Web engineer.</>,
+            <>Build fast,</>,
+            <>ship <em className="gradient-text">clean</em>.</>,
           ].map((line, i) => (
             <span key={i} className="block overflow-hidden">
               <motion.span
@@ -72,8 +72,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9, ease: EASE }}
         >
-          4年間のプロダクション開発経験を軸に、
-          ウェブの設計からインタラクション、リアルタイムグラフィックスまで。
+          Next.js・React・Node.jsを軸に、設計から本番デプロイまで一貫して担当。
+          週次リリースを4年間継続。
         </motion.p>
       </motion.div>
 
