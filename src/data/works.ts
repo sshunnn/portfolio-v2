@@ -40,7 +40,7 @@ export const works: Work[] = [
     githubUrl: "https://github.com/sshunnn/Drink-party-adjustment",
     liveUrl: "https://drink-party-adjustment.vercel.app",
     description:
-      "飲み会の日程調整Webアプリ。候補日の提案から出欠の集計までをシンプルに。",
+      "ログイン不要・URLシェアだけで飲み会の日程調整が完結するWebアプリ。Upstash Redisで状態を永続化し、○△×投票から最適日を自動算出。",
     gradient: "linear-gradient(135deg, #ffd9a0 0%, #ffa3a3 60%, #ffc4e1 100%)",
   },
   {
@@ -53,7 +53,7 @@ export const works: Work[] = [
     slug: "schedule-mate",
     githubUrl: "https://github.com/sshunnn/discord-calender",
     description:
-      "Discordの予定調整Bot。ボタン投票・カレンダー表示・最適日の自動算出。",
+      "Discord内で完結するスケジュール調整Bot。スラッシュコマンドで投票パネルを生成し、全員の回答から最適日を自動提案。Python + py-cord実装。",
     gradient: "linear-gradient(135deg, #c3cdff 0%, #9fb6ff 55%, #d9c6ff 100%)",
   },
   {
@@ -66,7 +66,7 @@ export const works: Work[] = [
     slug: "simple-split-tabs",
     githubUrl: "https://github.com/sshunnn/SimpleSplitTabs",
     description:
-      "開いているタブを分割表示するChrome拡張機能。",
+      "開いているタブをワンクリックで2分割・4分割配置するChrome拡張。Manifest V3準拠、依存ライブラリゼロの軽量実装。",
     gradient: "linear-gradient(135deg, #bdebd2 0%, #9fd8e8 70%, #cdeefc 100%)",
   },
   {
@@ -78,7 +78,7 @@ export const works: Work[] = [
     status: "live",
     slug: "shun-claude-workspace",
     description:
-      "Claude Code の設定・サブエージェント・スキルを集約するプライベートリポジトリ。AIに改善からPR作成まで全自動でやらせる仕組み。",
+      "Claude Codeのサブエージェント・スラッシュコマンド・スキルを集約するリポジトリ。コードレビューからブランチ作成・PR作成まで全自動化。",
     gradient: "linear-gradient(135deg, #e8d5ff 0%, #c4b5fd 40%, #a5b4fc 100%)",
   },
   {

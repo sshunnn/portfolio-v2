@@ -5,19 +5,19 @@ const FIELDS = [
   {
     no: "01",
     title: "Web Engineering",
-    text: "フロントエンドからバックエンドまで、プロダクションレベルのウェブ開発。",
+    text: "Next.js・React・Node.jsを軸に、要求分析から設計・実装・運用保守まで一貫して担当。Kubernetes環境での本番デプロイも週次で対応。",
     bg: "#ffe2cd",
   },
   {
     no: "02",
     title: "Interactive 3D",
-    text: "WebGLとシェーダーを使った、動きのある表現の設計と実装。",
+    text: "WebGLとGLSLシェーダーを使ったインタラクティブな3D表現の設計と実装。スクロール連動アニメーションやリアルタイムグラフィックスが得意領域。",
     bg: "#dde3ff",
   },
   {
     no: "03",
-    title: "Product Design",
-    text: "触って心地よいUI/UXの設計、プロトタイピング、検証。",
+    title: "AI-Driven Dev",
+    text: "Codex・Claude Codeを活用した開発自動化。APIテスト自動化で確認作業を2時間→10分に短縮するなど、AIとの協働で開発サイクルを効率化。",
     bg: "#d8f1e3",
   },
 ];
@@ -32,13 +32,13 @@ export default function About() {
 
         {/* characters focus in as you scroll — reading pace = scrolling pace */}
         <ScrollRevealText
-          text="東京を拠点に、ウェブとリアルタイムグラフィックスを横断しながら、思わず触りたくなる体験をつくっています。"
+          text="フロントエンドエンジニアとして4年間、大規模Webサービスのプロダクション開発を続けながら、ウェブとリアルタイムグラフィックスを横断した体験設計に取り組んでいます。"
           className="max-w-4xl font-jp-serif text-2xl leading-[1.9] tracking-wide md:text-4xl md:leading-[1.9]"
         />
 
         <Reveal delay={0.1}>
           <p className="mt-12 max-w-md font-jp text-sm leading-loose text-muted md:text-base">
-            このサイトは、つくったものを展示し、考えたことを記録していくための場所です。
+            アジャイル開発チームでの設計・実装から、AI駆動開発による効率化、後輩エンジニアの指導まで幅広く経験。このサイトはつくったものと考えたことを記録していく場所です。
           </p>
         </Reveal>
 
