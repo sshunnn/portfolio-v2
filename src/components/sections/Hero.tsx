@@ -49,9 +49,9 @@ export default function Hero() {
 
         <h1 className="max-w-4xl font-serif text-[13vw] leading-[1.04] tracking-tight md:text-[6.6vw]">
           {[
-            <>Web engineer.</>,
-            <>Build fast,</>,
-            <>ship <em className="gradient-text">clean</em>.</>,
+            <>4 years in</>,
+            <>production,</>,
+            <>still <em className="gradient-text">curious</em>.</>,
           ].map((line, i) => (
             <span key={i} className="block overflow-hidden">
               <motion.span

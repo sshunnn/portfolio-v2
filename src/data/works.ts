@@ -25,6 +25,7 @@ export const works: Work[] = [
     status: "live",
     slug: "portfolio-v2",
     githubUrl: "https://github.com/sshunnn/portfolio-v2",
+    image: "/works/portfolio-v2.png",
     description:
       "このサイト。WebGLのオブジェとタイポグラフィで構成した個人サイト。",
     gradient: "linear-gradient(135deg, #ffb88c 0%, #93a5ff 55%, #8fe3b4 100%)",
