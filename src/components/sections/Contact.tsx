@@ -34,10 +34,18 @@ export default function Contact() {
           </Reveal>
         </div>
 
+        <Reveal delay={0.2}>
+          <p className="mt-12 max-w-xl font-jp text-sm leading-loose text-bg/60">
+            フロントエンドエンジニアとして4年間の実務経験を持ち、現在新しいポジションを探しています。
+            Next.js・React・Node.jsでのプロダクション開発、Kubernetes運用、AI駆動開発に強みがあります。
+            お気軽にご連絡ください。
+          </p>
+        </Reveal>
+
         <Reveal delay={0.25}>
           <a
             href="mailto:shun.prog@gmail.com"
-            className="mt-12 inline-block border-b border-bg/30 pb-1 text-sm text-bg/60 transition-colors hover:border-bg hover:text-bg"
+            className="mt-6 inline-block border-b border-bg/30 pb-1 text-sm text-bg/60 transition-colors hover:border-bg hover:text-bg"
           >
             shun.prog@gmail.com
           </a>

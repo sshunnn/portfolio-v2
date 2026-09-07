@@ -11,39 +11,39 @@ const FEATURES = [
   {
     title: "2分割 / 4分割",
     description:
-      "ポップアップの2つのボタンから分割数を選択。2分割なら左右均等、4分割なら2×2のグリッドに自動配置。",
+      "ポップアップの2つのボタンから分割数を選択。2分割なら左右均等、4分割なら2×2グリッドに自動配置。操作はこれだけで完結する。",
   },
   {
-    title: "画面サイズ自動取得",
+    title: "解像度・OS非依存の均等配置",
     description:
-      "screen.availWidth / availHeight を使い、解像度・OSを問わず均等なサイズで配置。",
+      "screen.availWidth / availHeight を使い、現在の画面解像度を動的に取得して均等分割を計算。どの環境でもピクセルパーフェクトに配置できる。",
   },
   {
     title: "Manifest V3 + Service Worker",
     description:
-      "Chrome 拡張の最新仕様に準拠。バックグラウンドはイベント駆動の Service Worker で実装。",
+      "Chrome 拡張の最新仕様に準拠。バックグラウンド処理はイベント駆動の Service Worker で実装し、常駐プロセスによるメモリ消費を排除している。",
   },
   {
-    title: "最小限の実装",
+    title: "ゼロ依存・3ファイル構成",
     description:
-      "manifest.json + popup.html + background.js のわずか3ファイル構成。依存ライブラリなし。",
+      "manifest.json・popup.html・background.js のわずか3ファイルで完結。外部ライブラリを一切使わないため、インストール後のファイルサイズは数KBに収まる。",
   },
 ];
 
 const ARCHITECTURE = [
   {
     path: "manifest.json",
-    items: ["拡張設定・権限宣言（Manifest V3）"],
+    items: ["拡張設定・権限宣言（Manifest V3）", "Service Worker 登録"],
     description: "拡張設定",
   },
   {
     path: "popup.html",
-    items: ["分割ボタンのUI（200px幅のシンプルなポップアップ）"],
+    items: ["2分割・4分割ボタンのUI", "200px幅のシンプルなポップアップ"],
     description: "ポップアップUI",
   },
   {
     path: "background.js",
-    items: ["ウィンドウサイズ計算", "chrome.windows.create で分割配置"],
+    items: ["画面サイズ取得と分割計算", "chrome.windows.create で配置実行"],
     description: "Service Worker",
   },
 ];
@@ -63,8 +63,27 @@ export default function SimpleSplitTabsPage() {
       <section className="mb-20">
         <p className="label mb-4">Overview</p>
         <p className="font-jp text-lg leading-relaxed text-muted md:text-xl">
-          開いているタブを画面分割表示する Chrome 拡張機能。ポップアップから 2分割・4分割を選ぶと、
-          Chrome ウィンドウを均等サイズで自動配置する。インストールして1クリックで使える軽量ツール。
+          開いているタブをワンクリックで2分割・4分割配置するChrome拡張機能。
+          インストールしてポップアップを開き、ボタンを押すだけで現在のウィンドウを均等サイズに並べ直す。
+          外部ライブラリに依存しない3ファイル構成で、インストール後のファイルサイズは数KBに収まる。
+        </p>
+        <p className="mt-6 font-jp text-lg leading-relaxed text-muted md:text-xl">
+          複数ドキュメントを参照しながらコードを書くとき、ウィンドウの手動リサイズと配置に毎回時間がかかることに課題を感じていた。
+          既存の分割ツールはOSのウィンドウ管理機能に頼ったものが多く、ブラウザタブを直接操作できるChrome拡張として作ることで、
+          Chromeの中だけで完結する最小限のソリューションを実現した。
+        </p>
+      </section>
+
+      {/* technical focus */}
+      <section className="mb-20">
+        <p className="label mb-4">技術的なポイント</p>
+        <p className="font-jp text-sm leading-loose text-muted md:text-base">
+          Chrome Extension Manifest V3への準拠が最大の実装ポイントだった。
+          V3ではバックグラウンドスクリプトがService Workerに移行され、常駐処理が廃止されている。
+          今回の処理（ウィンドウ操作）はイベント駆動で完結するため、
+          Service Workerの制約（状態を持てない・常駐できない）と相性が良く、
+          V3への移行を逆に活かしてシンプルな設計に落とし込んだ。
+          chrome.windows.create API を使い、現在の画面サイズから各ウィンドウの座標とサイズを計算して配置している。
         </p>
       </section>
 
