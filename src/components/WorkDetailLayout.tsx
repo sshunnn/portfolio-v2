@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
   title: string;
   gradient: string;
+  image?: string;
   year: string;
   role: string;
   stack: string;
@@ -14,6 +16,7 @@ type Props = {
 export default function WorkDetailLayout({
   title,
   gradient,
+  image,
   year,
   role,
   stack,
@@ -34,11 +37,16 @@ export default function WorkDetailLayout({
         </Link>
 
         {/* hero */}
-        <div
-          className="mb-16 flex aspect-[3/1] items-end rounded-2xl p-8"
-          style={{ background: gradient }}
-        >
-          <h1 className="font-serif text-4xl italic tracking-tight text-ink/80 md:text-6xl">
+        <div className="relative mb-16 aspect-[3/1] overflow-hidden rounded-2xl">
+          {image ? (
+            <>
+              <Image src={image} alt={title} fill className="object-cover object-top" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent" />
+            </>
+          ) : (
+            <div className="absolute inset-0" style={{ background: gradient }} />
+          )}
+          <h1 className="absolute bottom-8 left-8 font-serif text-4xl italic tracking-tight text-white/90 md:text-6xl">
             {title}
           </h1>
         </div>
