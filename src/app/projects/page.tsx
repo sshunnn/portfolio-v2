@@ -30,7 +30,7 @@ export default function ProjectsPage() {
         </Reveal>
         <Reveal delay={0.1}>
           <h1 className="font-serif text-5xl tracking-tight md:text-7xl">
-            個人開発・<em className="gradient-text">趣味製作</em>
+            趣味で作った<em className="gradient-text">もの</em>
           </h1>
         </Reveal>
 
@@ -38,13 +38,13 @@ export default function ProjectsPage() {
         <Reveal delay={0.15}>
           <div className="mt-10 max-w-2xl rounded-2xl border border-line bg-ink/[0.02] px-8 py-6">
             <p className="font-jp text-sm leading-loose text-muted">
-              業務での開発成果はNDA・社内規定により非公開です。
-              ここに掲載しているのは、個人で「不便を感じた→作った」という動機から始めたサイドプロジェクトです。
-              実務での設計・実装力については
-              <Link href="/#about" className="mx-1 border-b border-muted/50 hover:border-ink hover:text-ink transition-colors">
-                Aboutセクション
+              業務の成果物はNDAにより非公開のため、暇なときに趣味で作ったものを置いています。
+              完成度は低く、実用性も微妙なものが多いです。
+              実務での経歴・スキルは
+              <Link href="/#about" className="mx-1 border-b border-muted/50 transition-colors hover:border-ink hover:text-ink">
+                こちら
               </Link>
-              の経歴をご参照ください。
+              をどうぞ。
             </p>
           </div>
         </Reveal>

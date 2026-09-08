@@ -14,17 +14,11 @@ export default function Works() {
           <Reveal delay={0.1}>
             <div className="max-w-2xl">
               <h2 className="font-serif text-4xl tracking-tight md:text-6xl">
-                個人開発・<em>サイドプロジェクト</em>
+                趣味で作った<em>もの</em>
               </h2>
               <p className="mt-8 font-jp text-sm leading-loose text-muted md:text-base">
-                業務での開発成果はNDA・社内規定により非公開のため、
-                プライベートで手がけたサイドプロジェクトを掲載しています。
-                いずれも「不便を感じた→作った」という動機で始めたもので、
-                実務での設計力・技術力はAboutセクションの経歴を参照してください。
-              </p>
-              <p className="mt-4 font-jp text-sm leading-loose text-muted md:text-base">
-                このポートフォリオサイト自体（WebGL・GLSLシェーダー・スクロールアニメーション）が
-                フロントエンド技術の実装例として最も参考になると思います。
+                業務の成果物はNDAにより非公開のため、暇なときに趣味で作ったものを置いています。
+                完成度は低く、実用性も微妙なものが多いですが、気になる方はどうぞ。
               </p>
             </div>
           </Reveal>
