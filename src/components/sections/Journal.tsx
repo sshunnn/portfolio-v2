@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { posts } from "@/data/posts";
 
@@ -35,16 +36,21 @@ export default function Journal() {
           <ul className="border-t border-line">
             {posts.map((post, i) => (
               <Reveal key={post.slug} delay={0.06 * i}>
-                <li className="group grid grid-cols-1 items-baseline gap-2 border-b border-line py-8 md:grid-cols-[10rem_1fr]">
-                  <span className="text-xs text-muted">{post.date}</span>
-                  <div>
-                    <h3 className="font-serif text-2xl tracking-tight transition-colors duration-300 group-hover:text-accent md:text-3xl">
-                      {post.title}
-                    </h3>
-                    <p className="mt-2 font-jp text-sm text-muted">
-                      {post.summary}
-                    </p>
-                  </div>
+                <li className="border-b border-line">
+                  <Link
+                    href={`/journal/${post.slug}`}
+                    className="group grid grid-cols-1 items-baseline gap-2 py-8 md:grid-cols-[10rem_1fr]"
+                  >
+                    <span className="text-xs text-muted">{post.date}</span>
+                    <div>
+                      <h3 className="font-serif text-2xl tracking-tight transition-colors duration-300 group-hover:text-accent md:text-3xl">
+                        {post.title}
+                      </h3>
+                      <p className="mt-2 font-jp text-sm text-muted">
+                        {post.summary}
+                      </p>
+                    </div>
+                  </Link>
                 </li>
               </Reveal>
             ))}
